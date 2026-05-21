@@ -46,15 +46,15 @@ def create_pillar(pillar_radius=0.5, pillar_height=4, base_length=1.5, base_heig
     Returns:
         str: The name of a group node containing the pillar and base.
     """
-    pillar = cmds.polyCylinder(r=pillar_radius, h=pillar_height)[0]
+    pillar = cmds.polyCylinder(radius=pillar_radius, height=pillar_height)[0]
     cmds.move(0, pillar_height / 2.0, 0, pillar)
     #create pillar with poly cylinder + move pillar to ground level
 
-    base = cmds.polyCube(w=base_length, h=base_height, d=base_length)[0]
+    base = cmds.polyCube(width=base_length, height=base_height, depth=base_length)[0]
     cmds.move(0, base_height / 2.0, 0, base)
     #create pillar base with poly cube + move to the ground plane
 
-    top = cmds.polyCube(w=base_length, h=base_height, d=base_length)[0]
+    top = cmds.polyCube(width=base_length, height=base_height, depth=base_length)[0]
     cmds.move(0, pillar_height + base_length, 0, top)
     #create pillar top with poly cube + move to the height of the pillar
 
@@ -64,10 +64,29 @@ def create_pillar(pillar_radius=0.5, pillar_height=4, base_length=1.5, base_heig
 
     return pillar_group
 
-def create_arch(length=6, height=5, depth=1, position=(0, 0, 0)):
+def create_arch(length=6, height=5, depth=1,subdivisionsX=6, subdivisionsY=2, position=(0, 0, 0)):
     """Create a simple arch using a sliced poly torus, deleting the lower haft. 
 
     Args:
-      length (float):
-      height (float): 
-      depth (float):
+        length (float): Length of the arch opening along the X axis.
+        height (float): Height from the base to the tip of the Arch.
+        depth (float): Depth of the arch along the Z axis.
+
+    Returns:
+        str: The name of the arch transformed node.
+    """
+    arch = cmds.polyTorus(length=length, height=height, depth=depth, subdivisionsX=subdivisionsX, subdivisionsY=subdivisionsY)[0]
+    cmds.move(0, 0, 0, arch)
+    #create arch with poly Torus, with subdivisions
+
+    cmds.select(f"{arch}.f[96:143]")
+    cmds.delete
+    #Select and delete bottom of the Torus
+
+    return arch 
+
+
+
+    
+
+    
