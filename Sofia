@@ -1,0 +1,47 @@
+def sphere(color="brown"):
+    """Create a sphere prop in Maya.
+
+    Args:
+        color (str): Color of the sphere. Default 'brown'.
+
+    Returns:
+        str: Name of the created object, or None on failure.
+    """
+    # Show which prop is being built and what color was requested
+    if DEBUG:
+        print(f"[DEBUG] make_sphere: color={color}")
+
+    try:
+        # Import thedef make_sphere(color="brown"):
+    """Create a sphere prop in Maya.
+
+    Args:
+        color (str): Color of the sphere. Default 'brown'.
+
+    Returns:
+        str: Name of the created object, or None on failure.
+    """
+    # Show which prop is being built and what color was requested
+    if DEBUG:
+        print(f"[DEBUG] make_sphere: color={color}")
+
+    try:
+        # Import the sphere .obj file into the current Maya scene
+        cmds.file("models/sphere.obj", i=True, type="OBJ")
+
+        # Grab the object Maya just imported
+        sphere = cmds.ls(selection=True)[0]
+
+        # Move 12 units along X so it doesn't overlap earlier props
+        cmds.move(12, 0, 0, sphere)
+
+        return sphere .obj file into the current Maya scene
+        cmds.file("models/sphere.obj", i=True, type="OBJ")
+
+        # Grab the object Maya just imported
+        sphere = cmds.ls(selection=True)[0]
+
+        # Move 12 units along X so it doesn't overlap earlier props
+        cmds.move(12, 0, 0, sphere)
+
+        return sphere
